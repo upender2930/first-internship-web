@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>IPL Quiz with GIF Feedback</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    .quiz-container {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      max-width: 600px;
+      width: 100%;
+      padding: 30px;
+    }
+    h1 {
+      text-align: center;
+      color: #e03e2f;
+      margin-bottom: 20px;
+    }
+    #question {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+    .answer-btn {
+      display: block;
+      width: 100%;
+      background-color: white; /* default white background */
+      color: black;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 12px;
+      margin: 8px 0;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .answer-btn:hover {
+      background-color: #f0f0f0;
+    }
+    /* Disable hover and pointer events after answering */
+    .no-hover {
+      pointer-events: none;
+      cursor: default;
+    }
+    .no-hover.answer-btn:hover {
+      background-color: white !important;
+      color: black !important;
+    }
+    #action-btn {
+      margin-top: 20px;
+      padding: 12px 20px;
+      font-size: 1rem;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      display: none; /* hidden initially */
+      transition: background-color 0.3s ease;
+    }
+    #action-btn:hover {
+      background: #0056b3;
+    }
+    #score-container {
+      text-align: center;
+      font-size: 1.3rem;
+      color: #333;
+      margin-top: 20px;
+    }
+    #gif-container {
+      text-align: center;
+      margin-top: 20px;
+      min-height: 150px; /* reserve space for GIF */
+    }
+
+    /* Responsive Media Queries */
+
+    /* Mobile devices (up to 640px) */
+    @media (max-width: 640px) {
+      .quiz-container {
+        padding: 15px;
+        max-width: 100%;
+      }
+      #question {
+        font-size: 1rem;
+      }
+      .answer-btn {
+        font-size: 0.9rem;
+        padding: 10px;
+      }
+      #action-btn {
+        width: 100%;
+        font-size: 1rem;
+        padding: 12px;
+      }
+    }
+
+    /* Tablets (641px to 1024px) */
+    @media (min-width: 641px) and (max-width: 1024px) {
+      .quiz-container {
+        padding: 25px 40px;
+        max-width: 700px;
+      }
+      #question {
+        font-size: 1.1rem;
+      }
+      .answer-btn {
+        font-size: 1rem;
+        padding: 12px;
+      }
+      #action-btn {
+        width: auto;
+        font-size: 1.1rem;
+        padding: 14px 24px;
+      }
+    }
+
+    /* Desktop (1025px and larger) */
+    @media (min-width: 1025px) {
+      .quiz-container {
+        padding: 30px 60px;
+        max-width: 800px;
+      }
+      #question {
+        font-size: 1.2rem;
+      }
+      .answer-btn {
+        font-size: 1.1rem;
+        padding: 14px;
+      }
+      #action-btn {
+        font-size: 1.2rem;
+        padding: 16px 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>IPL Quiz</h1>
+    <div id="question"></div>
+    <div id="answers"></div>
+    <button id="action-btn">Next</button>
+    <div id="score-container"></div>
+    <div id="gif-container"></div>
+  </div>
+
+  <script>
+    const quiz = [
+      {
+        question: "In which year was the Indian Premier League (IPL) founded?",
+        answers: ["2005", "2007", "2008", "2010"],
+        correct: 2
+      },
+      {
+        question: "Which two teams played the very first IPL match on April 18, 2008?",
+        answers: [
+          "Mumbai Indians and Chennai Super Kings",
+          "Kolkata Knight Riders and Royal Challengers Bangalore",
+          "Rajasthan Royals and Delhi Daredevils",
+          "Kings XI Punjab and Deccan Chargers"
+        ],
+        correct: 1
+      },
+      {
+        question: "Who is credited with the creation of the IPL?",
+        answers: ["Sourav Ganguly", "Lalit Modi", "MS Dhoni", "Virat Kohli"],
+        correct: 1
+      },
+      {
+        question: "How many teams currently compete in the IPL as of 2025?",
+        answers: ["8", "9", "10", "12"],
+        correct: 2
+      },
+      {
+        question: "Which two franchises have won the most IPL titles?",
+        answers: [
+          "Kolkata Knight Riders and Rajasthan Royals",
+          "Mumbai Indians and Chennai Super Kings",
+          "Royal Challengers Bangalore and Sunrisers Hyderabad",
+          "Gujarat Titans and Punjab Kings"
+        ],
+        correct: 1
+      },
+      {
+        question: "Who holds the record for the most runs scored in IPL history?",
+        answers: ["Rohit Sharma", "Chris Gayle", "Virat Kohli", "AB de Villiers"],
+        correct: 2
+      },
+      {
+        question: "Which player holds the record for the highest individual score in an IPL match?",
+        answers: ["Virat Kohli", "Chris Gayle", "AB de Villiers", "David Warner"],
+        correct: 1
+      },
+      {
+        question: "Which team won the inaugural IPL season in 2008?",
+        answers: ["Chennai Super Kings", "Mumbai Indians", "Rajasthan Royals", "Kolkata Knight Riders"],
+        correct: 2
+      },
+      {
+        question: "What is the format of the IPL tournament since 2022?",
+        answers: [
+          "Single round-robin followed by playoffs",
+          "Double round-robin with home and away matches",
+          "Two groups of five teams with a mix of matches, followed by playoffs",
+          "Knockout tournament only"
+        ],
+        correct: 2
+      },
+      {
+        question: "Which IPL team has the highest win percentage as of 2025?",
+        answers: ["Mumbai Indians", "Chennai Super Kings", "Gujarat Titans", "Sunrisers Hyderabad"],
+        correct: 2
+      }
+    ];
+
+    const questionEl = document.getElementById('question');
+    const answersEl = document.getElementById('answers');
+    const actionBtn = document.getElementById('action-btn');
+    const scoreContainer = document.getElementById('score-container');
+    const gifContainer = document.getElementById('gif-container');
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let answered = false;
+
+    // Replace with your actual Giphy API key
+    const giphyApiKey = '84Y7v1bumP2JZIpYsQC48nKhV4EennVB';
+
+    function showQuestion() {
+      answered = false;
+      scoreContainer.textContent = '';
+      gifContainer.innerHTML = '';
+      actionBtn.style.display = 'none';
+      actionBtn.textContent = 'Next';
+
+      const q = quiz[currentQuestionIndex];
+      questionEl.textContent = ${currentQuestionIndex + 1}. ${q.question};
+      answersEl.innerHTML = '';
+
+      q.answers.forEach((answer, index) => {
+        const button = document.createElement('button');
+        button.classList.add('answer-btn');
+        button.textContent = answer;
+        button.style.backgroundColor = 'white';
+        button.style.color = 'black';
+        button.disabled = false;
+        button.classList.remove('no-hover');
+        button.onclick = () => selectAnswer(index, button);
+        answersEl.appendChild(button);
+      });
+    }
+
+    function showGif(query) {
+  const url = https://api.giphy.com/v1/gifs/search?api_key=${giphyApiKey}&q=${encodeURIComponent(query)}&limit=10&rating=g;
+
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      if (data.data.length > 0) {
+        // Pick a random GIF from the results
+        const randomIndex = Math.floor(Math.random() * data.data.length);
+        const gifUrl = data.data[randomIndex].images.fixed_height.url;
+        gifContainer.innerHTML = <img src="${gifUrl}" alt="${query} GIF" style="max-width:100%; margin-top: 10px;">;
+      } else {
+        gifContainer.innerHTML = '';
+      }
+    })
+    .catch(err => {
+      console.error('Failed to fetch GIF:', err);
+      gifContainer.innerHTML = '';
+    });
+}
+
+    function selectAnswer(selectedIndex, button) {
+      if (answered) return;
+      answered = true;
+
+      const correctIndex = quiz[currentQuestionIndex].correct;
+      const buttons = answersEl.querySelectorAll('button');
+
+      buttons.forEach((btn, idx) => {
+        btn.disabled = true;
+        btn.classList.add('no-hover');
+        if (idx === correctIndex) {
+          btn.style.backgroundColor = '#28a745'; // green
+          btn.style.color = 'white';
+        } else if (idx === selectedIndex) {
+          btn.style.backgroundColor = '#dc3545'; // red
+          btn.style.color = 'white';
+        } else {
+          btn.style.backgroundColor = 'white';
+          btn.style.color = 'black';
+        }
+      });
+
+      if (selectedIndex === correctIndex) {
+        score++;
+        showGif('Happy Dance  by IPL cricketers'); 
+      } else {
+        showGif('ipl cricket sad'); 
+      }
+
+      actionBtn.style.display = 'inline-block';
+
+      if (currentQuestionIndex === quiz.length - 1) {
+        actionBtn.textContent = 'Show Score';
+      } else {
+        actionBtn.textContent = 'Next';
+      }
+    }
+
+    actionBtn.addEventListener('click', () => {
+      if (!answered) return; // prevent skipping without answering
+
+      if (actionBtn.textContent === 'Next') {
+        currentQuestionIndex++;
+        showQuestion();
+      } else if (actionBtn.textContent === 'Show Score') {
+        showScore();
+      }
+    });
+
+    function showScore() {
+      questionEl.textContent = 'Quiz Completed!';
+      answersEl.innerHTML = '';
+      actionBtn.style.display = 'none';
+      gifContainer.innerHTML = '';
+      scoreContainer.textContent = Your score: ${score} / ${quiz.length};
+    }
+
+    // Initialize quiz on page load
+    showQuestion();
+  </script>
+</body>
+</html>
