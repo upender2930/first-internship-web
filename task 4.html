@@ -1,0 +1,286 @@
+<!-- 🧠 UPENDER VARMA | Apex Task 4 - Updated Portfolio Code -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Apex Task 4 - Portfolio</title>
+  <style>
+    :root {
+      --primary: #1f1f1f;
+      --secondary: #292b2c;
+      --accent: #ffc107;
+      --text-light: #f8f9fa;
+      --text-muted: #ced4da;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--primary);
+      color: var(--text-light);
+    }
+    header {
+      background-color: var(--secondary);
+      padding: 1em 2em;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 2em;
+      padding: 0;
+      margin: 0;
+    }
+    nav a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: white;
+    }
+    section {
+      padding: 4em 2em;
+      margin: 1em auto;
+      max-width: 1000px;
+      scroll-margin-top: 80px;
+    }
+    h2 {
+      color: var(--accent);
+      margin-bottom: 1em;
+    }
+    .projects-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2em;
+      justify-content: center;
+    }
+    .project-card {
+      background-color: var(--secondary);
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      padding: 1.5em;
+      flex: 1 1 300px;
+      max-width: 300px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    }
+    .project-card img {
+      width: 90%;
+      height: 50%;
+      object-fit: cover;
+      border-radius: 8px;
+      object-fit: contain;
+    }
+    .project-card h3 {
+      margin: 0.5em 0;
+      color: var(--accent);
+    }
+    .project-card p {
+      color: var(--text-muted);
+    }
+    button {
+      margin: 0.5em 0.25em;
+      padding: 0.5em 1em;
+      background-color: var(--accent);
+      color: black;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e0a800;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      margin-top: 1em;
+    }
+    input, textarea {
+      padding: 0.8em;
+      border: 1px solid #666;
+      border-radius: 5px;
+      font-size: 1rem;
+      background-color: #222;
+      color: white;
+    }
+    footer {
+      text-align: center;
+      background-color: var(--secondary);
+      color: var(--text-muted);
+      padding: 1em;
+    }
+    #contact img {
+      width: 40px;
+      margin: 0 1em;
+      transition: transform 0.2s ease-in-out;
+    }
+    #contact img:hover {
+      transform: scale(1.1);
+    }
+    ul li {
+      margin-bottom: 1em;
+      font-size: 1.1em;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#shop">Shop</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section id="home">
+  <div style="text-align: center;">
+    <h1>UPENDER VARMA</h1>
+    <h3>Welcome to my Portfolio</h3>
+    <p>Explore my work, learn about my journey, and feel free to get in touch. I'm currently an intern at Apex, building dynamic web experiences with passion and precision.</p>
+  </div>
+</section>
+
+<section id="about">
+  <h2>About Me</h2>
+  <p>Hello! I'm a passionate web developer with a love for clean design and efficient code. I'm currently an intern at Apex, where I'm sharpening my skills by working on real-world projects.</p>
+  <p>💡 Skills: HTML5, CSS3, JavaScript, React, Bootstrap, Git, Responsive Design</p>
+</section>
+
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="projects-container">
+    <div class="project-card">
+      <h3>📌 To-do List</h3>
+      <p>A to-do list app with task editing and local storage support.</p>
+    </div>
+    <div class="project-card">
+      <h3>📌 Quiz App</h3>
+      <p>MCQ quiz app with timer, feedback, and score display.</p>
+    </div>
+    <div class="project-card">
+      <h3>📌 Contact Form</h3>
+      <p>Validates user input and gives instant feedback on submission.</p>
+    </div>
+  </div>
+</section>
+
+<section id="shop">
+  <h2>Shop</h2>
+  <div class="projects-container">
+    <div class="project-card">
+      <img src="https://m.media-amazon.com/images/I/71od4dD13lL.jpg" alt="Headphones">
+      <h3>🎧 Wireless Headphones</h3>
+      <p>₹2,499</p>
+      <button onclick="addToCart('Wireless Headphones', 2499)">Add to Cart</button>
+      <button onclick="buyNow('Wireless Headphones', 2499)">Buy Now</button>
+    </div>
+    <div class="project-card">
+      <img src="https://m.media-amazon.com/images/I/61MHLpET97L.jpg" alt="Laptop Stand">
+      <h3>💻 Laptop Stand</h3>
+      <p>₹999</p>
+      <button onclick="addToCart('Laptop Stand', 999)">Add to Cart</button>
+      <button onclick="buyNow('Laptop Stand', 999)">Buy Now</button>
+    </div>
+    <div class="project-card">
+      <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRq5gDk4mMhLn0uD8xuQrMudiXY0pu4qvhxoqqYl8mjPQa6emLZHDKSNksgayAdoCCLi1RBsA6Gk4qMUQYediI8efZKU9GFpw7vCslyKoVNpq4LDE0HJL2jx9w" alt="Wireless Mouse">
+      <h3>🖱️ Wireless Mouse</h3>
+      <p>₹699</p>
+      <button onclick="addToCart('Wireless Mouse', 699)">Add to Cart</button>
+      <button onclick="buyNow('Wireless Mouse', 699)">Buy Now</button>
+    </div>
+    <div class="project-card">
+      <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQZVNL8Q5Evr0d7GvbcsU4GJkEZHkwOlpr3BZahpMUSwc2C7_DbbRo3WPLtCIIODGdDc77Fy2uN7c2QGULWESbO5A6ezCj8rxMQs39i4ZVhZyFZglsQHg4XmI9f" alt="Smartphone Tripod">
+      <h3>📱 Smartphone Tripod</h3>
+      <p>₹799</p>
+      <button onclick="addToCart('Smartphone Tripod', 799)">Add to Cart</button>
+      <button onclick="buyNow('Smartphone Tripod', 799)">Buy Now</button>
+    </div>
+  </div>
+
+  <h3 style="margin-top:2em;">🛒 Cart</h3>
+  <ul id="cartItems" style="list-style:none; padding:0;"></ul>
+  <p id="cartTotal"><strong>Total:</strong> ₹0</p>
+</section>
+
+<section id="contact">
+  <h2>Contact Me</h2>
+  <form id="contactForm">
+    <input type="text" placeholder="Your Name" required />
+    <input type="email" placeholder="Your Email" required />
+    <textarea placeholder="Your Message" rows="6" required></textarea>
+    <button type="submit">Send</button>
+  </form>
+  <div style="margin-top: 2em; text-align: center;">
+    <a href="mailto:nadepelli.s@gmail.com"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email"></a>
+    <a href="https://www.linkedin.com/in/nadepelli-saketh-1a1940285"><img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="LinkedIn"></a>
+    <a href="https://github.com/SakethNadepelli"><img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub"></a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 UPENDER VARMA | Apex Internship Task 4</p>
+</footer>
+
+<script>
+  let cart = [];
+
+  function addToCart(productName, price) {
+    cart.push({ productName, price });
+    updateCartDisplay();
+  }
+
+  function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCartDisplay();
+  }
+
+  function updateCartDisplay() {
+    const cartList = document.getElementById("cartItems");
+    const totalElement = document.getElementById("cartTotal");
+    cartList.innerHTML = '';
+    let total = 0;
+
+    cart.forEach((item, index) => {
+      total += item.price;
+      const li = document.createElement('li');
+      li.innerHTML = `
+        ${item.productName} - ₹${item.price}
+        <button onclick="removeFromCart(${index})" style="margin-left: 10px; background:red; color:white; border:none; border-radius:5px; padding:0.2em 0.5em; cursor:pointer;">
+          Remove
+        </button>`;
+      cartList.appendChild(li);
+    });
+
+    totalElement.innerHTML = <strong>Total:</strong> ₹${total};
+  }
+
+  function buyNow(productName, price) {
+    alert(🛒 You selected to buy "${productName}" for ₹${price}. Checkout coming soon.);
+  }
+
+  document.getElementById("contactForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    alert("✅ Message submitted successfully!");
+  });
+</script>
+
+</body>
+</html>
