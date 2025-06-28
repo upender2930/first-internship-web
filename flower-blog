@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Flower Blog</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f4f7fa;
+      margin: 0;
+      padding: 0;
+      color: #222;
+    }
+
+    header {
+      background: #2d3e50;
+      color: #fff;
+      padding: 20px 0 10px 0;
+      text-align: center;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 10px 0;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav ul li a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 30px auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      padding: 30px;
+    }
+
+    section {
+      margin-bottom: 30px;
+    }
+
+    h1, h2 {
+      color: #2d3e50;
+    }
+
+    .flower-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+    }
+
+    .flower-card {
+      background: #fff8f0;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(200,150,100,0.09);
+      padding: 18px 14px 14px 14px;
+      flex: 1 1 220px;
+      min-width: 200px;
+      max-width: 260px;
+      text-align: center;
+      transition: box-shadow 0.2s;
+    }
+
+    .flower-card:hover {
+      box-shadow: 0 4px 16px rgba(200,150,100,0.17);
+    }
+
+    .flower-card img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 10px;
+      background: #fff;
+      border: 2px solid #f3e2d9;
+    }
+
+    .project-card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+      background-color: #fafafa;
+    }
+
+    .project-card a {
+      color: #2d3e50;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .project-card a:hover {
+      text-decoration: underline;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    input, textarea, button {
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    button {
+      background: #2d3e50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1a2533;
+    }
+
+    footer {
+      background: #2d3e50;
+      color: #fff;
+      text-align: center;
+      padding: 12px 0;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+
+    @media (max-width: 700px) {
+      main {
+        padding: 12px;
+      }
+
+      nav ul {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .flower-list {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Welcome to the Flower Blog</h1>
+    <nav>
+      <ul>
+        <li><a href="#flowers">Flowers</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="flowers">
+      <h2>Featured Flowers</h2>
+      <div class="flower-list"></div>
+    </section>
+
+    <section id="projects">
+      <h2>Featured Projects</h2>
+      <div id="featured-projects"></div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <form id="contact-form">
+        <input type="text" placeholder="Your Name" required />
+        <input type="email" placeholder="Your Email" required />
+        <textarea rows="4" placeholder="Your Message" required></textarea>
+        <button type="submit">Send</button>
+        <p id="form-status" style="color: green;"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Flower Blog. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const flowers = [
+      {
+        name: "Rose",
+        image: "https://images.unsplash.com/photo-1496062031456-07b8f162a322?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cm9zZXxlbnwwfHwwfHx8MA%3D%3D",
+        description: "The rose is a symbol of love and beauty. It comes in many colors, each with its own meaning."
+      },
+      {
+        name: "Sunflower",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQefcvbzCEKav0n_cvtRz6k_HhRZ9zQBkSrQg&s",
+        description: "Sunflowers are known for their large, bright yellow petals and their ability to turn towards the sun."
+      },
+      {
+        name: "Lily",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEms9i4f0wSfQiLjCbGZCw-D-IK1Yt00wznA&s",
+        description: "Lilies symbolize purity and renewal. They are often used in celebrations and ceremonies."
+      },
+      {
+        name: "Orchid",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAOzoMBPjp6BlnXVCBv85J5jN-e4O_8j_CsA&s",
+        description: "Orchids are exotic flowers that represent luxury, beauty, and strength."
+      },
+      {
+        name: "Tulip",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmq7AhMs_W_poyGoFueQlCOE4WT8ayIgkg9A&s",
+        description: "Tulips are spring-blooming flowers that come in a rainbow of colors, symbolizing perfect love."
+      },
+      {
+        name: "Marigold",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGeqkjSku85f2OenCdd0TpigGxSdy9fnboMg&s",
+        description: "Marigolds are known for their bright orange and yellow hues, symbolizing warmth, creativity, and positivity."
+      },
+      {
+        name: "Lotus",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZkIVbKp3cWeBRsD3iQnGVdv26cHnkCPmXjg&s",
+        description: "The lotus is a symbol of purity, enlightenment, and rebirth, especially in Eastern cultures."
+      }
+    ];
+
+    function renderFlowers(containerSelector, count = flowers.length) {
+      const container = document.querySelector(containerSelector);
+      if (!container) return;
+      container.innerHTML = flowers.slice(0, count).map(flower => `
+        <div class="flower-card">
+          <img src="${flower.image}" alt="${flower.name}" />
+          <h3>${flower.name}</h3>
+          <p>${flower.description}</p>
+        </div>
+      `).join("");
+    }
+
+    const projects = [
+      {
+        title: "Weather App",
+        description: "A simple weather app using OpenWeatherMap API.",
+        link: "#",
+      },
+      {
+        title: "Student Management System",
+        description: "A Java console app to manage student records.",
+        link: "#",
+      },
+      {
+        title: "Portfolio Website",
+        description: "This very website, built with HTML, CSS, and JS!",
+        link: "#",
+      },
+    ];
+
+    function renderProjects(containerId) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      container.innerHTML = projects.map(p => `
+        <div class="project-card">
+          <h3>${p.title}</h3>
+          <p>${p.description}</p>
+          <a href="${p.link}" target="_blank">View Project</a>
+        </div>
+      `).join("");
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      renderFlowers('.flower-list', 5);
+      renderProjects("featured-projects");
+
+      const form = document.getElementById("contact-form");
+      if (form) {
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          document.getElementById("form-status").textContent =
+            "Thank you! This is a demo contact form.";
+          form.reset();
+        });
+      }
+    });
+  </script>
+</body>
+</html>
