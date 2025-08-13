@@ -244,7 +244,7 @@
       actionBtn.textContent = 'Next';
 
       const q = quiz[currentQuestionIndex];
-      questionEl.textContent = ${currentQuestionIndex + 1}. ${q.question};
+      questionEl.textContent = `${currentQuestionIndex + 1}. ${q.question}`;
       answersEl.innerHTML = '';
 
       q.answers.forEach((answer, index) => {
@@ -261,7 +261,7 @@
     }
 
     function showGif(query) {
-  const url = https://api.giphy.com/v1/gifs/search?api_key=${giphyApiKey}&q=${encodeURIComponent(query)}&limit=10&rating=g;
+  const url = `https://api.giphy.com/v1/gifs/search?api_key=${giphyApiKey}&q=${encodeURIComponent(query)}&limit=10&rating=g`;
 
   fetch(url)
     .then(response => response.json())
@@ -270,7 +270,7 @@
         // Pick a random GIF from the results
         const randomIndex = Math.floor(Math.random() * data.data.length);
         const gifUrl = data.data[randomIndex].images.fixed_height.url;
-        gifContainer.innerHTML = <img src="${gifUrl}" alt="${query} GIF" style="max-width:100%; margin-top: 10px;">;
+        gifContainer.innerHTML = `<img src="${gifUrl}" alt="${query} GIF" style="max-width:100%; margin-top: 10px;">`;
       } else {
         gifContainer.innerHTML = '';
       }
@@ -335,7 +335,7 @@
       answersEl.innerHTML = '';
       actionBtn.style.display = 'none';
       gifContainer.innerHTML = '';
-      scoreContainer.textContent = Your score: ${score} / ${quiz.length};
+      scoreContainer.textContent = `Your score: ${score} / ${quiz.length}`;
     }
 
     // Initialize quiz on page load
